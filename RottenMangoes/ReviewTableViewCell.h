@@ -1,5 +1,5 @@
 //
-//  DetailViewController.h
+//  ReviewTableViewCell.h
 //  RottenMangoes
 //
 //  Created by Shaun Campbell on 2016-09-26.
@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Movie.h"
+#import "MovieReview.h"
 
-@interface DetailViewController : UIViewController
+@interface ReviewTableViewCell : UITableViewCell
 
-@property (nonatomic) Movie *movie;
+@property (nonatomic) MovieReview *review;
 
 @end
-

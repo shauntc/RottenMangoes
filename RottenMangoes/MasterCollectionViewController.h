@@ -1,5 +1,5 @@
 //
-//  DetailViewController.h
+//  MasterCollectionViewController.h
 //  RottenMangoes
 //
 //  Created by Shaun Campbell on 2016-09-26.
@@ -7,11 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Movie.h"
 
-@interface DetailViewController : UIViewController
-
-@property (nonatomic) Movie *movie;
+@interface MasterCollectionViewController : UICollectionViewController
 
 @end
-

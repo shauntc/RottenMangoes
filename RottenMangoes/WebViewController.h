@@ -1,5 +1,5 @@
 //
-//  DetailViewController.h
+//  WebViewController.h
 //  RottenMangoes
 //
 //  Created by Shaun Campbell on 2016-09-26.
@@ -7,11 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Movie.h"
 
-@interface DetailViewController : UIViewController
+@interface WebViewController : UIViewController
 
-@property (nonatomic) Movie *movie;
+@property NSURL *url;
 
 @end
-
