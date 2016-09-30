@@ -11,10 +11,14 @@
 #import "MovieCollectionViewCell.h"
 #import "DetailViewController.h"
 
+#define moviesPerPage 16
+
+
 @interface MasterCollectionViewController ()
 
 @property (nonatomic, readonly) NSString *theatresURL;
-@property (nonatomic) NSArray <NSArray <Movie *> *> *movies;
+@property (nonatomic) NSArray <Movie *> *movies;
+@property (nonatomic, assign) int numMovies;
 
 @end
 
@@ -60,7 +64,7 @@ static NSString * const reuseIdentifier = @"Cell";
         DetailViewController *nextVC = navVC.viewControllers[0];
         
         NSIndexPath *index = [self.collectionView indexPathsForSelectedItems][0];
-        nextVC.movie = self.movies[index.section][index.row];
+        nextVC.movie = self.movies[index.row];
         
     }
 }
@@ -70,28 +74,43 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     
-    return self.movies.count;
+    return 1;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
 
-    return self.movies[section].count;
+    return self.movies.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MovieCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MovieCell" forIndexPath:indexPath];
+    cell.movie = self.movies[indexPath.item];
     
-    cell.movie = self.movies[indexPath.section][indexPath.item];
+    
+    if(!self.movies[indexPath.item].poster)
+    {
+        [self.movies[indexPath.item] loadImageWithBlock:^(BOOL success) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [UIView animateWithDuration:1.0 animations:^{
+                    [self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
+                }];
+            });
+        }];
+    }
+    
+    
+    
     
     return cell;
 }
 
 -(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.item == self.movies[indexPath.section].count - 1 && indexPath.section == self.movies.count -1)
+    if(indexPath.item == self.movies.count - 1 && self.movies.count <= self.numMovies)
     {
-        [self retrieveMoviesIndex:(1 + (int)indexPath.section)];
+        [self retrieveMoviesIndex:(int)(self.movies.count / moviesPerPage)];
+        
     }
     
     
@@ -137,7 +156,11 @@ static NSString * const reuseIdentifier = @"Cell";
 
 -(NSString *)theatresURLForPage:(int)page
 {
-    return [NSString stringWithFormat:@"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?apikey=55gey28y6ygcr8fjy4ty87ek&page=%d",page];
+    
+    NSString *key = @"55gey28y6ygcr8fjy4ty87ek";
+    
+    
+    return [NSString stringWithFormat:@"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?apikey=%@&page=%d", key, page];
 }
 
 
@@ -156,19 +179,30 @@ static NSString * const reuseIdentifier = @"Cell";
             if(!jsonError)
             {
                 NSArray *movies = [[NSArray alloc] init];
+                
+                NSString *movieNumber = theatresData[@"total"];
+                
+                self.numMovies = [movieNumber intValue];
+                
+                NSArray <NSIndexPath *> *indexPaths = [[NSArray alloc] init];
 
                 for(NSDictionary *movieData in theatresData[@"movies"])
                 {
                     Movie *movie = [[Movie alloc] initWithDataDictionary:movieData];
-                    
+                    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:(self.movies.count + movies.count) inSection:0];
                     movies = [movies arrayByAddingObject:movie];
+                    indexPaths = [indexPaths arrayByAddingObject:indexPath];
                 }
                 
-                self.movies = [self.movies arrayByAddingObject:movies];
+                self.movies = [self.movies arrayByAddingObjectsFromArray:movies];
                 
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.collectionView reloadData];
+                [UIView animateWithDuration:1.0 animations:^{
+                    dispatch_async(dispatch_get_main_queue(), ^{
+
+                    [self.collectionView insertItemsAtIndexPaths:indexPaths];
                 });
+//                    [self.collectionView reloadData];
+                }];
             }
         }
     }];

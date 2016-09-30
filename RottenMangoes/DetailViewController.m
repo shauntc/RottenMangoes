@@ -9,11 +9,14 @@
 #import "DetailViewController.h"
 #import "ReviewTableViewCell.h"
 #import "WebViewController.h"
+#import "MapViewController.h"
+#import <MapKit/MapKit.h>
 
 @interface DetailViewController () <UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *posterImageView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITextView *synopsisTextView;
 
 @end
 
@@ -24,15 +27,8 @@
     
     self.tableView.backgroundColor = [UIColor clearColor];
     self.titleLabel.text = self.movie.title;
-    
-    NSURLSessionTask *task = [[NSURLSession sharedSession] downloadTaskWithURL:[NSURL URLWithString:_movie.posterURL] completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            _posterImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:location]];
-        });
-        
-    }];
-    [task resume];
+    self.synopsisTextView.text = self.movie.synopsis;
+    self.posterImageView.image = self.movie.poster;
     
     [self.movie loadReviewsWithBlock:^(BOOL success) {
         if(success)
@@ -49,6 +45,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     [self configureView];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    if(indexPath)
+    {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+    }
 }
 
 
@@ -98,6 +104,15 @@
         MovieReview *review = self.movie.reviews[[self.tableView indexPathForSelectedRow].row];
         
         nextVC.url = [NSURL URLWithString:review.reviewURL];
+        nextVC.title = review.reviewer;
+    }
+    else if([[segue identifier] isEqualToString:@"ShowTheatreMap"])
+    {
+        MapViewController *nextVC = segue.destinationViewController;
+        
+        
+        nextVC.movie = self.movie;
+        nextVC.title = @"Nearby Theatres";
     }
 }
 

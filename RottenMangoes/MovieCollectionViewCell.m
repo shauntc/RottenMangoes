@@ -22,26 +22,17 @@
 -(void)setMovie:(Movie *)movie
 {
     _movie = movie;
-    
-    NSURLSessionTask *task = [[NSURLSession sharedSession] downloadTaskWithURL:[NSURL URLWithString:_movie.posterURL] completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            _posterImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:location]];
-            
-        });
-        
-        
-        
-        
-        
-        
-    }];
-    
-    [task resume];
-    
-    
-    self.titleLabel.text = movie.title;
-    
+    [self configureView];
+}
+
+-(void)configureView
+{
+    _titleLabel.text = _movie.title;
+    if(_movie.poster)
+    {
+        _posterImageView.image = _movie.poster;
+    }
+
 }
 
 -(void)prepareForReuse{

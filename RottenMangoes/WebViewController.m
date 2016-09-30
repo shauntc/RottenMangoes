@@ -13,6 +13,7 @@
 
 @property WKWebView *webView;
 
+
 @end
 
 @implementation WebViewController
@@ -20,8 +21,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     self.webView = [[WKWebView alloc] init];
+    
     [self setUpWebView];
     
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
@@ -90,5 +91,7 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
 
 @end

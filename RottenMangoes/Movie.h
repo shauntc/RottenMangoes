@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MovieReview.h"
-
+#import "Theatre.h"
 
 @interface Movie : NSObject
 
@@ -18,10 +18,16 @@
 @property (nonatomic) NSString *posterURL;
 @property (nonatomic) NSString *synopsis;
 @property (nonatomic) NSArray<MovieReview *> *reviews;
+@property (nonatomic) NSArray<Theatre *> *theatres;
+@property (nonatomic) UIImage *poster;
 
 
 -(instancetype)initWithDataDictionary:(NSDictionary *)movieData;
 -(void)loadReviewsWithBlock:(void (^)(BOOL success))completionBlock;
+-(void)loadTheatresForAddress:(NSString *)address WithBlock:(void (^)(BOOL success))completionBlock;
+-(void)loadImageWithBlock:(void (^)(BOOL success))completionBlock;
+
+
 
 
 @end

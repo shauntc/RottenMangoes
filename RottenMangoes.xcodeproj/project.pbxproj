@@ -19,6 +19,10 @@
 		28A9F47F1D99CC5200B1B865 /* ReviewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9F47E1D99CC5200B1B865 /* ReviewTableViewCell.m */; };
 		28A9F4821D99CDF600B1B865 /* MovieReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9F4811D99CDF600B1B865 /* MovieReview.m */; };
 		28A9F4881D99EEAB00B1B865 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9F4871D99EEAB00B1B865 /* WebViewController.m */; };
+		28A9F48B1D9B07A700B1B865 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9F48A1D9B07A700B1B865 /* MapViewController.m */; };
+		28A9F48E1D9B09C800B1B865 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28A9F48D1D9B09C800B1B865 /* MapKit.framework */; };
+		28A9F4911D9B0AE200B1B865 /* Theatre.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9F4901D9B0AE200B1B865 /* Theatre.m */; };
+		28A9F49A1D9B244600B1B865 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9F4991D9B244600B1B865 /* LocationManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +48,13 @@
 		28A9F4811D99CDF600B1B865 /* MovieReview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieReview.m; sourceTree = "<group>"; };
 		28A9F4861D99EEAB00B1B865 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		28A9F4871D99EEAB00B1B865 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		28A9F4891D9B07A700B1B865 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		28A9F48A1D9B07A700B1B865 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		28A9F48D1D9B09C800B1B865 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		28A9F48F1D9B0AE200B1B865 /* Theatre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Theatre.h; sourceTree = "<group>"; };
+		28A9F4901D9B0AE200B1B865 /* Theatre.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Theatre.m; sourceTree = "<group>"; };
+		28A9F4981D9B244600B1B865 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
+		28A9F4991D9B244600B1B865 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28A9F48E1D9B09C800B1B865 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +74,7 @@
 			children = (
 				28A9F4541D999FE400B1B865 /* RottenMangoes */,
 				28A9F4531D999FE400B1B865 /* Products */,
+				28A9F48C1D9B09C800B1B865 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,6 +116,8 @@
 				28A9F45F1D999FE400B1B865 /* DetailViewController.m */,
 				28A9F4861D99EEAB00B1B865 /* WebViewController.h */,
 				28A9F4871D99EEAB00B1B865 /* WebViewController.m */,
+				28A9F4891D9B07A700B1B865 /* MapViewController.h */,
+				28A9F48A1D9B07A700B1B865 /* MapViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -134,6 +149,10 @@
 				28A9F4741D99A2F100B1B865 /* Movie.m */,
 				28A9F4801D99CDF600B1B865 /* MovieReview.h */,
 				28A9F4811D99CDF600B1B865 /* MovieReview.m */,
+				28A9F48F1D9B0AE200B1B865 /* Theatre.h */,
+				28A9F4901D9B0AE200B1B865 /* Theatre.m */,
+				28A9F4981D9B244600B1B865 /* LocationManager.h */,
+				28A9F4991D9B244600B1B865 /* LocationManager.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -147,6 +166,14 @@
 				28A9F47E1D99CC5200B1B865 /* ReviewTableViewCell.m */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		28A9F48C1D9B09C800B1B865 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				28A9F48D1D9B09C800B1B865 /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,13 +247,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28A9F49A1D9B244600B1B865 /* LocationManager.m in Sources */,
 				28A9F45A1D999FE400B1B865 /* AppDelegate.m in Sources */,
 				28A9F4751D99A2F100B1B865 /* Movie.m in Sources */,
 				28A9F4821D99CDF600B1B865 /* MovieReview.m in Sources */,
 				28A9F4571D999FE400B1B865 /* main.m in Sources */,
 				28A9F4881D99EEAB00B1B865 /* WebViewController.m in Sources */,
 				28A9F4781D99AD7A00B1B865 /* MasterCollectionViewController.m in Sources */,
+				28A9F4911D9B0AE200B1B865 /* Theatre.m in Sources */,
 				28A9F4601D999FE400B1B865 /* DetailViewController.m in Sources */,
+				28A9F48B1D9B07A700B1B865 /* MapViewController.m in Sources */,
 				28A9F47C1D99AE8C00B1B865 /* MovieCollectionViewCell.m in Sources */,
 				28A9F47F1D99CC5200B1B865 /* ReviewTableViewCell.m in Sources */,
 			);
@@ -383,6 +413,7 @@
 				28A9F46E1D999FE400B1B865 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
