@@ -45,6 +45,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     [self configureView];
+    
+    if (self.movie == nil) {
+        UIView *view = [[UIView alloc] initWithFrame:self.view.frame];
+        view.backgroundColor = [UIColor blackColor];
+        UILabel *label = [[UILabel alloc] initWithFrame:self.view.frame];
+        label.textColor = [UIColor whiteColor];
+        label.text = @"Select a Movie";
+        label.textAlignment = NSTextAlignmentCenter;
+        [view addSubview:label];
+        [self.view addSubview:view];
+        view.center = self.view.center;
+        label.center = view.center;
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated
